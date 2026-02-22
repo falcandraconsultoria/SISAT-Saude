@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISAT-Saúde | Sistema de Informação de Satisfação dos Utentes</title>
+    
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Animado -->
+    <div class="gradient-bg">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+    </div>
+
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-sisat">SISAT</span>
+                        <span class="logo-saude">Saúde</span>
+                    </div>
+                </div>
+
+                <div class="welcome-message">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <p>Bem-vindo ao Sistema de Informação de Satisfação dos Utentes</p>
+                </div>
+
+                <div class="data-source-panel">
+                    <h3 class="panel-title">
+                        <i class="fas fa-database"></i>
+                        <span>Fonte de Dados</span>
+                    </h3>
+
+                    <div class="source-tabs">
+                        <button class="source-tab active" data-tab="upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            Upload
+                        </button>
+                        <button class="source-tab" data-tab="link">
+                            <i class="fas fa-link"></i>
+                            Link
+                        </button>
+                    </div>
+
+                    <div class="tab-content active" id="uploadTab">
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-file-upload"></i>
+                            <p>Arraste ou clique para carregar</p>
+                            <span>Suporta: .xlsx, .xls, .csv</span>
+                            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" hidden>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="linkTab">
+                        <div class="input-group">
+                            <input type="url" id="webLink" placeholder="https://...">
+                            <button class="btn-load" id="loadLinkBtn">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <p class="help-note">
+                            <i class="fas fa-info-circle"></i>
+                            KoboToolbox, Google Drive, etc.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="filters-panel" id="filtersPanel" style="display: none;">
+                    <h3 class="panel-title">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>Filtros</span>
+                    </h3>
+
+                    <div class="filter-group">
+                        <label>Província</label>
+                        <div class="select-wrapper">
+                            <select id="provinciaFilter">
+                                <option>Todas</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Distrito</label>
+                        <div class="select-wrapper">
+                            <select id="distritoFilter">
+                                <option>Todos</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Unidade Sanitária</label>
+                        <div class="select-wrapper">
+                            <select id="unidadeFilter">
+                                <option>Todas</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Serviço</label>
+                        <div class="select-wrapper">
+                            <select id="servicoFilter">
+                                <option>Todos</option>
+                                <option>Consulta</option>
+                                <option>Farmácia</option>
+                                <option>Internamento</option>
+                                <option>Laboratório</option>
+                                <option>Radiologia</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Período</label>
+                        <div class="select-wrapper">
+                            <select id="periodoFilter">
+                                <option>Todos</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <button class="btn-apply" id="applyFilters">
+                        <i class="fas fa-magic"></i>
+                        Aplicar Filtros
+                    </button>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="misau-brand">
+                        <i class="fas fa-hospital"></i>
+                        <span>MISAU</span>
+                    </div>
+                    <div class="version">v1.0.0</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-area">
+            <header class="content-header">
+                <div class="header-left">
+                    <h1>SISAT-Saúde</h1>
+                    <p>Sistema de Informação de Satisfação dos Utentes</p>
+                </div>
+                <div class="header-right">
+                    <div class="date-badge">
+                        <i class="far fa-calendar-alt"></i>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Welcome Section (inicial) -->
+            <div class="welcome-section" id="welcomeSection">
+                <div class="welcome-card">
+                    <div class="welcome-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2>Bem-vindo ao SISAT-Saúde</h2>
+                    <p>Carregue os dados de satisfação dos utentes para visualizar o dashboard interativo</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <h4>Processamento Rápido</h4>
+                            <p>Análise automática dos dados</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-pie"></i>
+                            <h4>Visualizações Interativas</h4>
+                            <p>Gráficos dinâmicos e intuitivos</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bell"></i>
+                            <h4>Alertas Inteligentes</h4>
+                            <p>Identificação de áreas críticas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content (inicialmente oculto) -->
+            <div class="dashboard-content" id="dashboardContent" style="display: none;">
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="kpi-info">
+                            <h3>Satisfação Global</h3>
+                            <div class="kpi-value" id="globalSatisfaction">0%</div>
+                            <div class="kpi-trend">
+                                <span class="trend-label">Meta: 80%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="globalProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="kpi-info">
+                            <h3>Tempo de Espera</h3>
+                            <div class="kpi-value" id="tempoEsperaValue">0%</div>
+                            <div class="kpi-trend">
+                                <span class="trend-label">Meta: 70%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="tempoEsperaProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #5ea6f0 0%, #2b6c9e 100%);">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="kpi-info">
+                            <h3>Humanização</h3>
+                            <div class="kpi-value" id="humanizacaoValue">0%</div>
+                            <div class="kpi-trend">
+                                <span class="trend-label">Meta: 85%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="humanizacaoProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);">
+                            <i class="fas fa-broom"></i>
+                        </div>
+                        <div class="kpi-info">
+                            <h3>Higiene</h3>
+                            <div class="kpi-value" id="higieneValue">0%</div>
+                            <div class="kpi-trend">
+                                <span class="trend-label">Meta: 90%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="higieneProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 1 -->
+                <div class="charts-row">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-bar"></i> Satisfação por Serviço</h3>
+                            <div class="chart-legend"></div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="servicoChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-pie"></i> Distribuição por Dimensão</h3>
+                            <div class="chart-legend"></div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="charts-row">
+                    <div class="chart-card full-width">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-line"></i> Tendência Temporal</h3>
+                            <div class="chart-legend"></div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="tendenciaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alertas e Recomendações -->
+                <div class="alerts-section">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Alertas e Recomendações</h3>
+                    <div class="alerts-grid" id="alertsContainer">
+                        <!-- Alertas serão inseridos via JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Processando dados...</p>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
