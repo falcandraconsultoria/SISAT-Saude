@@ -492,7 +492,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.misau-brand {
+.falcandra-brand {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -501,13 +501,19 @@ body {
     font-weight: 600;
 }
 
-.misau-brand i {
+.falcandra-brand i {
     color: #ffd88b;
+    animation: pulse 2s infinite;
 }
 
 .version {
-    color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: white;
     font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 /* Main Area */
