@@ -6,18 +6,27 @@
 
 **Sistema de Informação de Satisfação dos Utentes de Saúde**
 
-[![Versão](https://img.shields.io/badge/versão-1.0.0-blue)](https://github.com/misau/sisat-saude)
+[![Versão](https://img.shields.io/badge/versão-1.0.0-blue)](https://github.com/falcandra/sisat-saude)
 [![Licença](https://img.shields.io/badge/licença-MIT-green)](LICENSE)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.28.0-red)](https://streamlit.io)
-[![Python](https://img.shields.io/badge/Python-3.9+-yellow)](https://python.org)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+[![HTML5](https://img.shields.io/badge/HTML5-5-orange)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-3-blue)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 
 </div>
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
-O **SISAT-Saúde** é um sistema desenvolvido pelo Ministério da Saúde de Moçambique (MISAU) para monitorar e analisar a satisfação dos utentes nos serviços de saúde. Transforma dados de questionários em informações claras e visualmente atraentes para apoiar a tomada de decisão baseada em evidências.
+O **SISAT-Saúde** é um sistema desenvolvido por **Falcandra Data Consulting** para monitorar e analisar a satisfação dos utentes nos serviços de saúde. Transforma dados de questionários em informações claras e visualmente atraentes para apoiar a tomada de decisão baseada em evidências.
 
-### 🎯 Objetivos Principais
+### Sobre a Falcandra Data Consulting
+
+A Falcandra Data Consulting é uma empresa especializada em soluções de análise de dados para o setor de saúde, com foco em:
+- **Transformação digital** de processos de monitoria e avaliação
+- **Dashboards interativos** para tomada de decisão
+- **Sistemas de informação** para gestão de saúde
+- **Análise preditiva** e business intelligence
+
+### Objetivos Principais
 
 - Monitorar a satisfação dos utentes em unidades sanitárias
 - Identificar áreas críticas que necessitam intervenção
@@ -25,7 +34,7 @@ O **SISAT-Saúde** é um sistema desenvolvido pelo Ministério da Saúde de Moç
 - Facilitar comparações entre serviços e regiões
 - Gerar alertas e recomendações automáticas
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 | Funcionalidade | Descrição |
 |----------------|-----------|
@@ -36,7 +45,7 @@ O **SISAT-Saúde** é um sistema desenvolvido pelo Ministério da Saúde de Moç
 | **Recomendações** | Sugestões automáticas para melhoria baseadas nos resultados |
 | **Análise de Tendências** | Acompanhamento temporal dos indicadores |
 
-## 📊 Indicadores
+## Indicadores
 
 | Indicador | Descrição | Meta |
 |-----------|-----------|------|
@@ -51,11 +60,11 @@ O **SISAT-Saúde** é um sistema desenvolvido pelo Ministério da Saúde de Moç
 
 ### Acesso Online
 
-O sistema está disponível em: [https://sisat-saude.misau.gov.mz](https://sisat-saude.misau.gov.mz)
+O sistema está disponível em: [https://sisat-saude.falcandra.ao](https://sisat-saude.falcandra.ao) *(exemplo)*
 
 ### Instalação Local
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/misau/sisat-saude.git
+git clone https://github.com/falcandra/sisat-saude.git
 cd sisat-saude
